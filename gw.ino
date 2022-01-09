@@ -1,5 +1,6 @@
 #include <SPI.h>
 #include <TickTwo.h>
+//#include <Ticker.h>
 #include "Led.h"
 #include "Adafruit_MAX31855.h"
 
@@ -28,6 +29,7 @@ TickTwo cronLed(ledBlink, 500, 0, MILLIS); // blink led every 1/2s, indefinitely
 // Globals
 const int ledEsp = 2; // by the antenna
 const int ledMcu = 16; // by the mini usb connector
+//Ticker tickit2(Led::blinky, 888, 0, MICROS);
 Led ledUsb(ledMcu);
 bool ledEspState;
 bool ledMcuState;
@@ -65,6 +67,25 @@ void ledBlink() {
   digitalWrite(ledEsp, ledEspState);
   ledEspState = !ledEspState;
 }
+
+class Foo {
+  private:
+    bool a;
+
+  public:
+    Foo(bool inita);
+    void printa();
+};
+
+Foo::Foo(bool inita) {
+  this->a = inita;
+}
+
+void Foo::printa() {
+  Serial.println("a is:");
+  Serial.println(String(a));
+}
+
 
 void setup() {
   Serial.begin(9600);
