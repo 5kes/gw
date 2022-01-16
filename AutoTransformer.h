@@ -10,10 +10,12 @@ class AutoTransformer {
   
   private:
     Ats ats;
+    int id;
     
   public:
-    AutoTransformer(Ats atsSwitch);
+    AutoTransformer(Ats atsSwitch, int id);
     bool getAtsState();
+    int getId();
 };
 
 #endif

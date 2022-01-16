@@ -14,7 +14,8 @@
 #include "AutoTransformer.h"
 
 Ats myAts;
-AutoTransformer myAt(myAts);
+AutoTransformer myAt69(myAts, 69);
+AutoTransformer myAt88(myAts, 88);
 
 // Pins
 const int MAXDO = 12; // D6 of NodeMCU connects to 'DO' data out of MAX31855
@@ -108,7 +109,10 @@ void setup() {
   delay(2000);
 
   Serial.println("My ats state: " + String(myAts.getAtsState()));
-  Serial.println("My ats state via AutoTransformer: " + String(myAt.getAtsState()));
+  Serial.println("My ats state via AutoTransformer 69: " + String(myAt69.getAtsState()));
+  Serial.println("My ats state via AutoTransformer 88: " + String(myAt88.getAtsState()));
+  Serial.println("My AT ID: " + String(myAt69.getId()));
+  Serial.println("My AT ID: " + String(myAt88.getId()));
     
   // if dry contact is open, attempt to auto-bootstrap system
   if (!atsState) {
