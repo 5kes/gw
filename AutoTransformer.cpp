@@ -8,5 +8,6 @@ AutoTransformer::AutoTransformer(Ats atsSwitch) {
 }
 
 bool AutoTransformer::getAtsState() {
+  Serial.println("Getting ATS state from AT");
   return ats.getAtsState();
 }

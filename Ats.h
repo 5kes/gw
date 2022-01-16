@@ -6,11 +6,12 @@
 class Ats {
   
 //  private:
-//    static bool atsState;
+//    bool atsState;
     
   public:
     Ats();
-    static bool getAtsState();
+    bool getAtsState();
+//    void setAtsState(bool newState);
 
 };
 

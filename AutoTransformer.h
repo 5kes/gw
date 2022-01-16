@@ -9,7 +9,7 @@ class Ats;
 class AutoTransformer {
   
   private:
-    static Ats ats;
+    Ats ats;
     
   public:
     AutoTransformer(Ats atsSwitch);
