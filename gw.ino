@@ -108,6 +108,7 @@ void setup() {
   delay(2000);
 
   Serial.println("My ats state: " + String(myAts.getAtsState()));
+  Serial.println("My ats state via AutoTransformer: " + String(myAt.getAtsState()));
     
   // if dry contact is open, attempt to auto-bootstrap system
   if (!atsState) {

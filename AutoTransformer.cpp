@@ -4,5 +4,9 @@
 class Ats;
 
 AutoTransformer::AutoTransformer(Ats atsSwitch) {
-//  this->ats = new Ats();
+  this->ats = atsSwitch;
+}
+
+bool AutoTransformer::getAtsState() {
+  return ats.getAtsState();
 }

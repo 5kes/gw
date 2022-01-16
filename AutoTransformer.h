@@ -8,11 +8,12 @@ class Ats;
 
 class AutoTransformer {
   
-//  private:
-//    static Ats *ats;
+  private:
+    static Ats ats;
     
   public:
     AutoTransformer(Ats atsSwitch);
+    bool getAtsState();
 };
 
 #endif
