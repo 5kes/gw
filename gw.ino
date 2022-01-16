@@ -9,6 +9,13 @@
  * NSC: Neutral Safety Contactor
  */
 
+ // TESTING
+#include "Ats.h"
+#include "AutoTransformer.h"
+
+Ats myAts;
+AutoTransformer myAt(myAts);
+
 // Pins
 const int MAXDO = 12; // D6 of NodeMCU connects to 'DO' data out of MAX31855
 const int MAXCS = 15; // D8 of NodeMCU connects to 'CS' of MAX31855
@@ -46,7 +53,7 @@ double ampsHyst = 3.0; // hysteresis, must be positive double that is < ampsThre
 
 const int atsPin = 4; // D2 input pullup, triggers when connected to GND of NodeMCU
 volatile bool atsState; // true = on-grid (dry contact loop open)
-const int atsDebounceDelay = 1000; // 50ms debounce filter
+const int atsDebounceDelay = 50; // 50ms debounce filter
 volatile long lastAtsDebounceTime = 0; // last millis() time ats debounce was triggered
 
 volatile bool nscState = false; // neutral safety contactor state, default this to false (disconnected)
@@ -88,25 +95,29 @@ void Foo::printa() {
 
 
 void setup() {
-  Serial.begin(9600);
-  while (!Serial) delay(1); // wait for Serial on Leonardo/Zero, etc
-  Serial.println("Booting...");
-  delay(2000);
+  
   pinMode(ledEsp, OUTPUT);
   pinMode(atsPin, INPUT_PULLUP);
   
   atsState = digitalRead(atsPin);
+  attachInterrupt(digitalPinToInterrupt(atsPin), atsAction, CHANGE);
 
+  Serial.begin(9600);
+  while (!Serial) delay(1); // wait for Serial on Leonardo/Zero, etc
+  Serial.println("Booting...");
+  delay(2000);
+
+  Serial.println("My ats state: " + String(myAts.getAtsState()));
+    
   // if dry contact is open, attempt to auto-bootstrap system
   if (!atsState) {
+    Serial.println("System booted with dry contact open, attempting to auto-bootstrap...");
     cronTempBoot.start();
     cronGoOffGrid.start();
   }
 
   cronTemp.start();
   cronAmps.start();
-
-  attachInterrupt(digitalPinToInterrupt(atsPin), atsAction, CHANGE);
   
   if (!thermocouple.begin()) {
     Serial.println("Unable to start thermocouple");
