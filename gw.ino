@@ -23,7 +23,7 @@ Adafruit_MAX31855 thermocouple(MAXCLK, MAXCS, MAXDO);
 Ats myAts;
 AutoTransformer myAt69(myAts, 69);
 AutoTransformer myAt88(myAts, 88);
-Thermocouple myTherm(MAXDO, MAXCS, MAXCLK);
+Thermocouple myTherm(MAXDO, MAXCS, MAXCLK, 80, 1.5);
 
 
 // Timers
@@ -137,6 +137,9 @@ void setup() {
     Serial.println("Unable to start thermocouple");
     while (1) delay(10);
   }
+  myTherm.getInterval();
+  myTherm.setInterval(5000);
+  myTherm.getInterval();
   Serial.println("Booting complete");
 }
 
