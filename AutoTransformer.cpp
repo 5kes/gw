@@ -3,8 +3,8 @@
 
 class Ats;
 
-AutoTransformer::AutoTransformer(Ats atsSwitch, int id) {
-  this->ats = atsSwitch;
+AutoTransformer::AutoTransformer(Ats ats, int id) {
+  this->ats = ats;
   this->id = id;
 }
 

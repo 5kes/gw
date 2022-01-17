@@ -9,19 +9,22 @@
  * NSC: Neutral Safety Contactor
  */
 
- // TESTING
-#include "Ats.h"
-#include "AutoTransformer.h"
-
-Ats myAts;
-AutoTransformer myAt69(myAts, 69);
-AutoTransformer myAt88(myAts, 88);
-
 // Pins
 const int MAXDO = 12; // D6 of NodeMCU connects to 'DO' data out of MAX31855
 const int MAXCS = 15; // D8 of NodeMCU connects to 'CS' of MAX31855
 const int MAXCLK = 14; // D5 of NodeMCU connects to 'CLK' of MAX31855
 Adafruit_MAX31855 thermocouple(MAXCLK, MAXCS, MAXDO);
+
+ // TESTING
+#include "Ats.h"
+#include "AutoTransformer.h"
+#include "Thermocouple.h"
+
+Ats myAts;
+AutoTransformer myAt69(myAts, 69);
+AutoTransformer myAt88(myAts, 88);
+Thermocouple myTherm(MAXDO, MAXCS, MAXCLK);
+
 
 // Timers
 void getTemp(); // thermocouple
@@ -143,6 +146,7 @@ void loop() {
   cronTempBoot.update();
   cronGoOffGrid.update();
   cronLed.update();
+  myTherm.updateTimer();
 }
 
 ICACHE_RAM_ATTR void atsAction(){

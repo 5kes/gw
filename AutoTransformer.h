@@ -13,7 +13,7 @@ class AutoTransformer {
     int id;
     
   public:
-    AutoTransformer(Ats atsSwitch, int id);
+    AutoTransformer(Ats ats, int id);
     bool getAtsState();
     int getId();
 };
