@@ -5,13 +5,13 @@
 
 class Ats {
   
-//  private:
-//    bool atsState;
+  private:
+    static bool atsState;
     
   public:
     Ats();
     bool getAtsState();
-//    void setAtsState(bool newState);
+    static void setAtsState(bool newState);
 
 };
 

@@ -113,6 +113,12 @@ void setup() {
   Serial.println("My ats state via AutoTransformer 88: " + String(myAt88.getAtsState()));
   Serial.println("My AT ID: " + String(myAt69.getId()));
   Serial.println("My AT ID: " + String(myAt88.getId()));
+  Serial.println("Changing ats state");
+  Ats::setAtsState(false);
+  Serial.println("Done changing ats state");
+  Serial.println("My NEW ats state via AutoTransformer 69: " + String(myAt69.getAtsState()));
+  Serial.println("My NEW ats state via AutoTransformer 88: " + String(myAt88.getAtsState()));
+  
     
   // if dry contact is open, attempt to auto-bootstrap system
   if (!atsState) {
