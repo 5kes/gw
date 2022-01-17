@@ -11,6 +11,7 @@ class Thermocouple {
     Adafruit_MAX31855 *thermocouple;
     TickTwo *runTick;
     void runFunc();
+    double currentTemp;
     
   public:
     Thermocouple(

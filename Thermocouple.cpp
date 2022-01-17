@@ -11,7 +11,10 @@ Thermocouple::Thermocouple(
       const int8_t DO) {
   Serial.println("Making new thermocouple");
   this->thermocouple = new Adafruit_MAX31855(CLK, CS, DO);
-  this->runTick = new TickTwo([](){ Serial.println("hello"); }, 1000, 0, MILLIS);
+  this->runTick = new TickTwo([this](){
+    this->currentTemp = this->thermocouple->readFahrenheit();
+    Serial.println("Current temp is: " + String(this->currentTemp));
+    }, 1000, 0, MILLIS);
   this->runTick->start();
 //  this->thermocouple->readFahrenheit();
 }
