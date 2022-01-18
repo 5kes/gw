@@ -15,7 +15,7 @@ class Inverter {
   public:
     Inverter(int atsPin);
     bool getAtsState();
-    void setupInterrupt();
+    void setupInterrupt(void (*)());
 //    static void setAtsState(bool newState);
 
 };

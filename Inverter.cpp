@@ -25,8 +25,8 @@ void ICACHE_RAM_ATTR Inverter::handleAtsChange() {
   Serial.println("handling ATS change");
 }
 
-void Inverter::setupInterrupt() {
-  attachInterrupt(digitalPinToInterrupt(atsPin), handleAtsChange, CHANGE);
+void Inverter::setupInterrupt(void (*handleChange)()) {
+  attachInterrupt(digitalPinToInterrupt(atsPin), handleChange, CHANGE);
 }
 
 Inverter::Inverter(int atsPin) {

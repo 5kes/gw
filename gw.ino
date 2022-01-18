@@ -26,6 +26,10 @@ AutoTransformer myAt69(myAts, 69);
 AutoTransformer myAt88(myAts, 88);
 Thermocouple myTherm(MAXDO, MAXCS, MAXCLK, 80, 1.5);
 
+void ICACHE_RAM_ATTR setupChangeHandler() {
+  Serial.println("handling ATS change with setup defined function");
+}
+
 
 // Timers
 void getTemp(); // thermocouple
@@ -114,7 +118,7 @@ void setup() {
 
   Inverter myInv(4);
   Serial.println("My inverter atsState: " + String(myInv.getAtsState()));
-  myInv.setupInterrupt();
+  myInv.setupInterrupt(setupChangeHandler);
 
   Serial.println("My ats state: " + String(myAts.getAtsState()));
   Serial.println("My ats state via AutoTransformer 69: " + String(myAt69.getAtsState()));
