@@ -20,14 +20,16 @@ Adafruit_MAX31855 thermocouple(MAXCLK, MAXCS, MAXDO);
 #include "AutoTransformer.h"
 #include "Thermocouple.h"
 #include "Inverter.h"
+#include "Relay.h"
 
 Ats myAts;
 AutoTransformer myAt69(myAts, 69);
 AutoTransformer myAt88(myAts, 88);
 Thermocouple myTherm(MAXDO, MAXCS, MAXCLK, 80, 1.5);
+Inverter myInv(4);
 
-void ICACHE_RAM_ATTR setupChangeHandler() {
-  Serial.println("handling ATS change with setup defined function");
+void ICACHE_RAM_ATTR atsChangeHandler() {
+  Serial.println("handling ATS change with setup defined function 1");
 }
 
 
@@ -116,9 +118,8 @@ void setup() {
   Serial.println("Booting...");
   delay(2000);
 
-  Inverter myInv(4);
   Serial.println("My inverter atsState: " + String(myInv.getAtsState()));
-  myInv.setupInterrupt(setupChangeHandler);
+  myInv.setupInterrupt(atsChangeHandler);
 
   Serial.println("My ats state: " + String(myAts.getAtsState()));
   Serial.println("My ats state via AutoTransformer 69: " + String(myAt69.getAtsState()));
