@@ -19,6 +19,7 @@ Adafruit_MAX31855 thermocouple(MAXCLK, MAXCS, MAXDO);
 #include "Ats.h"
 #include "AutoTransformer.h"
 #include "Thermocouple.h"
+#include "Inverter.h"
 
 Ats myAts;
 AutoTransformer myAt69(myAts, 69);
@@ -101,15 +102,19 @@ void Foo::printa() {
 void setup() {
   
   pinMode(ledEsp, OUTPUT);
-  pinMode(atsPin, INPUT_PULLUP);
-  
-  atsState = digitalRead(atsPin);
-  attachInterrupt(digitalPinToInterrupt(atsPin), atsAction, CHANGE);
+//  pinMode(atsPin, INPUT_PULLUP);
+//  
+//  atsState = digitalRead(atsPin);
+//  attachInterrupt(digitalPinToInterrupt(atsPin), atsAction, CHANGE);
 
   Serial.begin(9600);
   while (!Serial) delay(1); // wait for Serial on Leonardo/Zero, etc
   Serial.println("Booting...");
   delay(2000);
+
+  Inverter myInv(4);
+  Serial.println("My inverter atsState: " + String(myInv.getAtsState()));
+  myInv.setupInterrupt();
 
   Serial.println("My ats state: " + String(myAts.getAtsState()));
   Serial.println("My ats state via AutoTransformer 69: " + String(myAt69.getAtsState()));
